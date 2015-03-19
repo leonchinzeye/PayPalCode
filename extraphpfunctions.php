@@ -1,6 +1,6 @@
 <?php
 
-function debugPrint() {
+function debugPrintln() {
 	echo "<script>console.log('I here');</script>";
 }
 

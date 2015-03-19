@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 
 <?php
-    // include "connect_db.php";
 ?>
 <html lang="en">
 
@@ -30,36 +29,56 @@
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <a href="#" type="button" class="btn btn-default navbar-btn">
+                <a href="index.php" type="button" class="btn btn-default navbar-btn">
                     <span class="glyphicon glyphicon-home"></span>Leon
                 </a>
             </div>
             
            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <a href="cart.php" type="button" class="btn second-button btn-default navbar-btn"><span class="glyphicon glyphicon-shopping-cart"></span> Cart <span class="badge">0</span></a>        
+                    <a href="cart.php" type="button" class="btn second-button btn-default navbar-btn">
+                    <?php
+                    $cart_count = 0;
+                    if(isset($_SESSION["cart_items"])) {
+                        $cart_count = count($_SESSION["cart_items"]);
+                    }
+                    ?>
+                    <span class="glyphicon glyphicon-shopping-cart"></span> Cart <span class="badge"><?php echo $cart_count; ?></span></a>        
                </ul>
             </div><!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->
     </nav>
 
+    <?php
+    if(isset($_SESSION["added_item_id"])) {
+        echo "<div class = 'alert alert-info'>";
+            echo "<strong>".$_SESSION["listItemName"][$_SESSION["added_item_id"]]."</strong>".$_SESSION["addedMessage"];
+        echo "</div>";
+
+        unset($_SESSION["added_item_id"]);
+        unset($_SESSION["addedMessage"]);
+    }
+    ?>
+
     <!-- Page Content -->
     <div class="container">
 
         <div class="row">
 
-            <div class="col-md-3">
+            <!-- <div class="col-md-3">
                 <p class="lead">Shop Name</p>
                 <div class="list-group">
                     <a href="#" class="list-group-item">Category 1</a>
                     <a href="#" class="list-group-item">Category 2</a>
                     <a href="#" class="list-group-item">Category 3</a>
                 </div>
-            </div>
+            </div> -->
 
-            <div class="col-md-9">
+            <!-- <div class="col-md-9"> -->
 
+
+            <div>
                 <div class="row carousel-holder">
 
                     <div class="col-md-12">
@@ -94,11 +113,8 @@
                 <div class="row">
 
                 <?php
-                // echo("<script>console.log('I here: ');</script>");
-                // $numItems = isset($_GET["numItems"]) ? $_GET["numItems"] : "";
-                // $numItems = count($_SESSION["listItemID"]);
+
                 $numItems = $_SESSION["numItems"];
-                // echo("<script>console.log('Counter: ".$numItems."');</script>");
 
                 if($numItems > 0) {
                     $listItemID = $_SESSION["listItemID"];
@@ -112,12 +128,13 @@
                         $itemPrice = $listItemPrice[$i];
                         $itemQty = $listItemPrice[$i];
 
+                        // debugPrintVar("ItemPrice", $itemPrice);
                         // echo("<script>console.log('ID:".$itemID.", Name:".$itemName.", Price:".$itemPrice.", Qty:".$itemQty."');</script>");
                         echo "<div class='col-sm-4 col-lg-4 col-md-4'>";
                             echo "<div class = 'thumbnail'>";
                                 echo "<a href = '#'><img src = 'http://placehold.it/320x150' data-toggle = 'modal' data-target ='#item".$itemID."-modal'></a>";
                                 echo "<div class='caption'>";
-                                    echo "<h4 class='pull-right'>{$itemPrice}</h4>";
+                                    echo "<h4 class='pull-right'>S$".number_format($itemPrice, 2, '.', ',')."</h4>";
                                     echo "<h4><a href='#' data-toggle='modal' data-target='#item".$itemID."-modal'>{$itemName}</a></h4>";
                                     echo "<p>Testing</p>";
                                 echo "</div>";
@@ -138,7 +155,7 @@
                                     echo "</div>";
 
                                     echo "<div class = 'modal-footer'>";
-                                        echo "<a href = 'add_to_cart.php' type = 'button' class = 'btn btn-primary'>Add To Cart</a>";
+                                        echo "<a href = 'add_to_cart.php?id={$itemID}' type = 'button' class = 'btn btn-primary'>Add To Cart</a>";
                                     echo "</div>";
                                 echo "</div>";
                             echo "</div>";
