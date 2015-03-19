@@ -1,4 +1,12 @@
 <!DOCTYPE html>
+<?php
+session_start();
+
+$cart_counter = $_SESSION["cartcounter"];
+$cart = $_SESSION["cart"];
+$itemArray = $_SESSION["itemArray"];
+
+?>
 <html lang="en">
 
 <head>
@@ -40,7 +48,8 @@
             
            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <a href="#" type="button" class="btn second-button btn-default navbar-btn">Cart<span class="glyphicon glyphicon-shopping-cart"></span></a>        
+                    <a href="cart.php" type="button" class="btn second-button btn-default navbar-btn">
+                    <span class="glyphicon glyphicon-shopping-cart"></span> Cart <span class="badge"><?php echo $cart_counter?></span></a>        
                </ul>
             </div><!-- /.navbar-collapse -->
         </div>
@@ -61,46 +70,38 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="col-sm-8 col-md-6">
-                        <div class="media">
-                            <a class="thumbnail pull-left" href="#"> <img class="media-object" src="http://icons.iconarchive.com/icons/custom-icon-design/flatastic-2/72/product-icon.png" style="width: 72px; height: 72px;"> </a>
-                            <div class="media-body">
-                                <h4 class="media-heading"><a href="#">Product name</a></h4>
-                                <h5 class="media-heading"> by <a href="#">Brand name</a></h5>
-                                <span>Status: </span><span class="text-success"><strong>In Stock</strong></span>
-                            </div>
-                        </div></td>
-                        <td class="col-sm-1 col-md-1" style="text-align: center">
-                        <input type="email" class="form-control" id="exampleInputEmail1" value="3">
-                        </td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>$4.87</strong></td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>$14.61</strong></td>
-                        <td class="col-sm-1 col-md-1">
-                        <button type="button" class="btn btn-danger">
-                            <span class="glyphicon glyphicon-remove"></span> Remove
-                        </button></td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-6">
-                        <div class="media">
-                            <a class="thumbnail pull-left" href="#"> <img class="media-object" src="http://icons.iconarchive.com/icons/custom-icon-design/flatastic-2/72/product-icon.png" style="width: 72px; height: 72px;"> </a>
-                            <div class="media-body">
-                                <h4 class="media-heading"><a href="#">Product name</a></h4>
-                                <h5 class="media-heading"> by <a href="#">Brand name</a></h5>
-                                <span>Status: </span><span class="text-warning"><strong>Leaves warehouse in 2 - 3 weeks</strong></span>
-                            </div>
-                        </div></td>
-                        <td class="col-md-1" style="text-align: center">
-                        <input type="email" class="form-control" id="exampleInputEmail1" value="2">
-                        </td>
-                        <td class="col-md-1 text-center"><strong>$4.99</strong></td>
-                        <td class="col-md-1 text-center"><strong>$9.98</strong></td>
-                        <td class="col-md-1">
-                        <button type="button" class="btn btn-danger">
-                            <span class="glyphicon glyphicon-remove"></span> Remove
-                        </button></td>
-                    </tr>
+
+                <?php
+                for($i = 0; $i < count($_SESSION["cart"]); $i++) {
+                    $itemID = $cart[$i]["id"];
+                    $rowID = $itemID - 1;
+                    $itemName = $itemArray[$rowID]["name"];
+                    $itemPrice = $itemArray[$rowID]["price"];
+                    $itemTotal = $itemPrice * $cart[$i]["qty"];
+                    echo "<tr>";
+                        echo "<td class = 'col-sm-8 col-md-6'>";
+                        echo "<div class = 'media'>";
+                            echo "<a class = 'thumbnail pull-left' href = '#'> <img class = 'media-object' src = 'http://icons.iconarchive.com/icons/custom-icon-design/flatastic-2/72/product-icon.png' style = 'width: 72px; height: 72px'></a>";
+                            echo "<div class = 'media-body'>";
+                                echo "<h4 class='media-heading'><a href='#'>".$itemName."</a></h4>";
+                                // echo "<h5 class='media-heading'> by <a href='#'>Brand name</a></h5>";
+                                echo "<span>Status: </span><span class='text-success'><strong>In Stock</strong></span>";
+                            echo "</div>";
+                        echo "</div></td>";
+                        echo "<td class='col-sm-1 col-md-1' style='text-align: center'>";
+                        echo "<input type='email' class='form-control' id='exampleInputEmail1' value='".$cart[$i]["qty"]."'>";
+                        echo "</td>";
+                        echo "<td class='col-sm-1 col-md-1 text-center'><strong>S$".$itemPrice."</strong></td>";
+                        echo "<td class='col-sm-1 col-md-1 text-center'><strong>S$".$itemTotal."</strong></td>";
+                        echo "<td class='col-sm-1 col-md-1'>";
+                        echo "<button type='button' class='btn btn-danger'>";
+                            echo "<span class='glyphicon glyphicon-remove'></span> Remove";
+                        echo "</button></td>";
+                    echo "</tr>";
+                }
+
+                ?>
+                    
                     <tr>
                         <td>   </td>
                         <td>   </td>
@@ -124,9 +125,13 @@
                     </tr>
                     <tr>
                         <td>   </td>
-                        <td>   </td>
+                        <td> 
+                        <a href="emptycart.php" type = "button" class = "btn btn-default">
+                            Empty Cart
+                        </a></td>
+
                         <td>
-                        <a href="index.html" type="button" class="btn btn-default">
+                        <a href="index.php" type="button" class="btn btn-default">
                             <span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping
                         </a></td>
                         <td>
