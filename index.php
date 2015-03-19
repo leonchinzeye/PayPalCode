@@ -7,21 +7,6 @@ include "extraphpfunctions.php";
 include "connect_db.php";
 include "frontPage.php";
 
-$action = isset($_GET['action']) ? $_GET['action'] : "";
-$id = isset($_GET['id']) ? $_GET['id'] : "";
-$product_id = isset($_GET['product_id']) ? $_GET['product_id'] : "1";
-
-if($action == "added") {
-    $_SESSION["added_item_id"] = $id;
-    $_SESSION["addedMessage"] = "was added to your cart!";
-}
-
-if($action == "exists") {
-    $_SESSION["added_item_id"] = $id;
-    $_SESSION["addedMessage"] = "already exists in your cart!";
-}
-
-
 $qr = "SELECT id, name, price, qty, descrip FROM ItemList";
 $itemDB = $conn->query($qr);
 

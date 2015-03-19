@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <?php
+
 ?>
 <html lang="en">
 
@@ -37,46 +38,17 @@
            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <a href="cart.php" type="button" class="btn second-button btn-default navbar-btn">
-                    <?php
-                    $cart_count = 0;
-                    if(isset($_SESSION["cart_items"])) {
-                        $cart_count = count($_SESSION["cart_items"]);
-                    }
-                    ?>
-                    <span class="glyphicon glyphicon-shopping-cart"></span> Cart <span class="badge"><?php echo $cart_count; ?></span></a>        
+                    <span class="glyphicon glyphicon-shopping-cart"></span> Cart <span class="badge">0</span></a>        
                </ul>
             </div><!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->
     </nav>
 
-    <?php
-    if(isset($_SESSION["added_item_id"])) {
-        echo "<div class = 'alert alert-info'>";
-            echo "<strong>".$_SESSION["listItemName"][$_SESSION["added_item_id"]]."</strong>".$_SESSION["addedMessage"];
-        echo "</div>";
-
-        unset($_SESSION["added_item_id"]);
-        unset($_SESSION["addedMessage"]);
-    }
-    ?>
-
     <!-- Page Content -->
     <div class="container">
 
         <div class="row">
-
-            <!-- <div class="col-md-3">
-                <p class="lead">Shop Name</p>
-                <div class="list-group">
-                    <a href="#" class="list-group-item">Category 1</a>
-                    <a href="#" class="list-group-item">Category 2</a>
-                    <a href="#" class="list-group-item">Category 3</a>
-                </div>
-            </div> -->
-
-            <!-- <div class="col-md-9"> -->
-
 
             <div>
                 <div class="row carousel-holder">
