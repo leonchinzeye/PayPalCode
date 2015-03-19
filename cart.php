@@ -5,6 +5,7 @@ session_start();
 $cart_counter = $_SESSION["cartcounter"];
 $cart = $_SESSION["cart"];
 $itemArray = $_SESSION["itemArray"];
+$sum = 0;
 
 ?>
 <html lang="en">
@@ -56,106 +57,113 @@ $itemArray = $_SESSION["itemArray"];
         <!-- /.container -->
     </nav>
 
-    <div class="container">
-    <div class="row">
-        <div class="col-sm-12 col-md-10 col-md-offset-1">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>Product</th>
-                        <th>Quantity</th>
-                        <th class="text-center">Price</th>
-                        <th class="text-center">Total</th>
-                        <th> </th>
-                    </tr>
-                </thead>
-                <tbody>
+    <?php
+        if(count($cart) == 0) {
+            echo "<div class = 'alert alert-info'>";
+                echo "<strong>There's nothing in your cart!</strong>";
+            echo "</div>";
+        } 
 
-                <?php
-                for($i = 0; $i < count($_SESSION["cart"]); $i++) {
-                    $itemID = $cart[$i]["id"];
-                    $rowID = $itemID - 1;
-                    $itemName = $itemArray[$rowID]["name"];
-                    $itemPrice = $itemArray[$rowID]["price"];
-                    $itemTotal = $itemPrice * $cart[$i]["qty"];
-                    echo "<tr>";
-                        echo "<td class = 'col-sm-8 col-md-6'>";
-                        echo "<div class = 'media'>";
-                            echo "<a class = 'thumbnail pull-left' href = '#'> <img class = 'media-object' src = 'http://icons.iconarchive.com/icons/custom-icon-design/flatastic-2/72/product-icon.png' style = 'width: 72px; height: 72px'></a>";
-                            echo "<div class = 'media-body'>";
-                                echo "<h4 class='media-heading'><a href='#'>".$itemName."</a></h4>";
-                                // echo "<h5 class='media-heading'> by <a href='#'>Brand name</a></h5>";
-                                echo "<span>Status: </span><span class='text-success'><strong>In Stock</strong></span>";
-                            echo "</div>";
-                        echo "</div></td>";
-                        echo "<td class='col-sm-1 col-md-1' style='text-align: center'>";
-                        echo "<input type='email' class='form-control' id='exampleInputEmail1' value='".$cart[$i]["qty"]."'>";
-                        echo "</td>";
-                        echo "<td class='col-sm-1 col-md-1 text-center'><strong>S$".$itemPrice."</strong></td>";
-                        echo "<td class='col-sm-1 col-md-1 text-center'><strong>S$".$itemTotal."</strong></td>";
-                        echo "<td class='col-sm-1 col-md-1'>";
-                        echo "<button type='button' class='btn btn-danger'>";
-                            echo "<span class='glyphicon glyphicon-remove'></span> Remove";
-                        echo "</button></td>";
-                    echo "</tr>";
-                }
+        else {
+            echo "<div class='container'>";
+                echo "<div class='row'>";
+                    echo "<div class='col-sm-12 col-md-10 col-md-offset-1'>";
+                        echo "<table class='table table-hover'>";
+                            echo "<thead>";
+                                echo "<tr>";
+                                    echo "<th>Product</th>";
+                                    echo "<th>Quantity</th>";
+                                    echo "<th class='text-center'>Price</th>";
+                                    echo "<th class='text-center'>Total</th>";
+                                    echo "<th> </th>";
+                                echo "</tr>";
+                            echo "</thead>";
+                            echo "<tbody>";
 
-                ?>
-                    
-                    <tr>
-                        <td>   </td>
-                        <td>   </td>
-                        <td>   </td>
-                        <td><h5>Subtotal</h5></td>
-                        <td class="text-right"><h5><strong>$24.59</strong></h5></td>
-                    </tr>
-                    <tr>
-                        <td>   </td>
-                        <td>   </td>
-                        <td>   </td>
-                        <td><h5>Estimated shipping</h5></td>
-                        <td class="text-right"><h5><strong>$6.94</strong></h5></td>
-                    </tr>
-                    <tr>
-                        <td>   </td>
-                        <td>   </td>
-                        <td>   </td>
-                        <td><h3>Total</h3></td>
-                        <td class="text-right"><h3><strong>$31.53</strong></h3></td>
-                    </tr>
-                    <tr>
-                        <td>   </td>
-                        <td> 
-                        <a href="emptycart.php" type = "button" class = "btn btn-default">
-                            Empty Cart
-                        </a></td>
-
-                        <td>
-                        <a href="index.php" type="button" class="btn btn-default">
-                            <span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping
-                        </a></td>
-                        <td>
+                                for($i = 0; $i < count($_SESSION["cart"]); $i++) {
+                                    $itemID = $cart[$i]["id"];
+                                    $rowID = $itemID - 1;
+                                    $itemName = $itemArray[$rowID]["name"];
+                                    $itemPrice = $itemArray[$rowID]["price"];
+                                    $itemTotal = $itemPrice * $cart[$i]["qty"];
+                                    $sum += $itemTotal;
+                                    echo "<tr>";
+                                        echo "<td class = 'col-sm-8 col-md-6'>";
+                                        echo "<div class = 'media'>";
+                                            echo "<a class = 'thumbnail pull-left' href = '#'> <img class = 'media-object' src = 'http://icons.iconarchive.com/icons/custom-icon-design/flatastic-2/72/product-icon.png' style = 'width: 72px; height: 72px'></a>";
+                                            echo "<div class = 'media-body'>";
+                                                echo "<h4 class='media-heading'><a href='#'>".$itemName."</a></h4>";
+                                                // echo "<h5 class='media-heading'> by <a href='#'>Brand name</a></h5>";
+                                                echo "<span>Status: </span><span class='text-success'><strong>In Stock</strong></span>";
+                                            echo "</div>";
+                                        echo "</div></td>";
+                                        echo "<td class='col-sm-1 col-md-1' style='text-align: center'>";
+                                        echo "<input type='email' class='form-control' id='exampleInputEmail1' value='".$cart[$i]["qty"]."'>";
+                                        echo "</td>";
+                                        echo "<td class='col-sm-1 col-md-1 text-center'><strong>S$".number_format($itemPrice, 2, ".", ",")."</strong></td>";
+                                        echo "<td class='col-sm-1 col-md-1 text-center'><strong>S$".number_format($itemTotal, 2, ".", ",")."</strong></td>";
+                                        echo "<td class='col-sm-1 col-md-1'>";
+                                        echo "<button type='button' class='btn btn-danger'>";
+                                            echo "<span class='glyphicon glyphicon-remove'></span> Remove";
+                                        echo "</button></td>";
+                                    echo "</tr>";
+                                }
                             
-                        
-                            
-                        <form action="Checkout/paypal_ec_redirect.php" method="POST">
-                              <input type="hidden" name="PAYMENTREQUEST_0_AMT" value="10.0"></input>
-                              <input type="hidden" name="currencyCodeType" value="SGD"></input>
-                              <input type="hidden" name="paymentType" value="Sale"></input>
-                              <!--Pass additional input parameters based on your shopping cart. For complete list of all the parameters click here -->
-                              <input type="image" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-medium.png" alt="Check out with PayPal"></input>
-                        </form>
-                        </td>
-                        <td>
-                        <button type="button" class="btn btn-success">
-                            Checkout <span class="glyphicon glyphicon-play"></span>
-                        </button></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+                                echo "<tr>";
+                                    echo "<td>   </td>";
+                                    echo "<td>   </td>";
+                                    echo "<td>   </td>";
+                                    echo "<td><h5>Subtotal</h5></td>";
+                                    echo "<td class='text-right'><h5><strong>S$".number_format($sum, 2, ".", ",")."</strong></h5></td>";
+                                echo "</tr>";
+                                
+                                echo "<tr>";
+                                    echo "<td>   </td>";
+                                    echo "<td>   </td>";
+                                    echo "<td>   </td>";
+                                    echo "<td><h5>Estimated shipping</h5></td>";
+                                    echo "<td class='text-right'><h5><strong>$6.94</strong></h5></td>";
+                                echo "</tr>";
+                                echo "<tr>";
+                                    echo "<td>   </td>";
+                                    echo "<td>   </td>";
+                                    echo "<td>   </td>";
+                                    echo "<td><h3>Total</h3></td>";
+                                    echo "<td class='text-right'><h3><strong>S$".number_format($sum, 2, ".", ",")."</strong></h3></td>";
+                                echo "</tr>";
+                                echo "<tr>";
+                                    echo "<td>   </td>";
+                                    echo "<td>";
+                                    echo "<a href='emptycart.php' type = 'button' class = 'btn btn-default'>";
+                                        echo "Empty Cart";
+                                    echo "</a></td>";
+
+                                    echo "<td>";
+                                    echo "<a href='index.php' type='button' class='btn btn-default'>";
+                                        echo "<span class='glyphicon glyphicon-shopping-cart'></span> Continue Shopping";
+                                    echo "</a></td>";
+                                    echo "<td>";
+                                        
+                                    echo "<form action='Checkout/paypal_ec_redirect.php' method='POST'>";
+                                          echo "<input type='hidden' name='PAYMENTREQUEST_0_AMT' value='10.0'></input>";
+                                          echo "<input type='hidden' name='currencyCodeType' value='SGD'></input>";
+                                          echo "<input type='hidden' name='paymentType' value='Sale'></input>";
+                                          //<!--Pass additional input parameters based on your shopping cart. For complete list of all the parameters click here -->
+                                          echo "<input type='image' src='https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-medium.png' alt='Check out with PayPal'></input>";
+                                    echo "</form>";
+                                    echo "</td>";
+                                    echo "<td>";
+                                    echo "<button type='button' class='btn btn-success'>";
+                                        echo "Checkout <span class='glyphicon glyphicon-play'></span>";
+                                    echo "</button></td>";
+                                echo "</tr>";
+                            echo "</tbody>";
+                        echo "</table>";
+                    echo "</div>";
+                echo "</div>";
+            echo "</div>";
+        }
+    ?>
     <!-- /.container -->
 
     <div class="container">
