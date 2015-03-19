@@ -7,9 +7,7 @@ if($numItems > 0) {
     $itemArray = $_SESSION["itemArray"];
 }
 
-if(empty($_SESSION["cart"])) {
-    $cart_counter = 0;
-}
+$cart_counter = $_SESSION["cartcounter"];
 ?>
 
 <html lang="en">

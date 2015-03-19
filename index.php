@@ -1,5 +1,7 @@
 <?php
+
 session_start();
+
 
 $page_title = "Index";
 
@@ -11,6 +13,10 @@ $qr = "SELECT id, name, price, qty, descrip FROM ItemList";
 $itemDB = $conn->query($qr);
 
 //initialist cart
+
+if(!isset($_SESSION["cartcounter"])) {
+    $_SESSION["cartcounter"] = 0;
+}
 
 if(!isset($_SESSION["cart"])) {
     $_SESSION["cart"] = array();
