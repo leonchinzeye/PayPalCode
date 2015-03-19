@@ -1,7 +1,15 @@
 <!DOCTYPE html>
 
 <?php
+$numItems = $_SESSION["numItems"];
 
+if($numItems > 0) {
+    $listItemID = $_SESSION["listItemID"];
+    $listItemName = $_SESSION["listItemName"];
+    $listItemPrice = $_SESSION["listItemPrice"];
+    $listItemQty = $_SESSION["listItemQty"];
+    $listItemDescrip = $_SESSION["listItemDescrip"];
+}
 ?>
 <html lang="en">
 
@@ -88,53 +96,46 @@
 
                 $numItems = $_SESSION["numItems"];
 
-                if($numItems > 0) {
-                    $listItemID = $_SESSION["listItemID"];
-                    $listItemName = $_SESSION["listItemName"];
-                    $listItemPrice = $_SESSION["listItemPrice"];
-                    $listItemQty = $_SESSION["listItemQty"];
+                for($i = 0; $i < $numItems; $i++) {
+                    $itemID = $listItemID[$i];
+                    $itemName = $listItemName[$i];
+                    $itemPrice = $listItemPrice[$i];
+                    $itemQty = $listItemPrice[$i];
 
-                    for($i = 0; $i < $numItems; $i++) {
-                        $itemID = $listItemID[$i];
-                        $itemName = $listItemName[$i];
-                        $itemPrice = $listItemPrice[$i];
-                        $itemQty = $listItemPrice[$i];
+                    // debugPrintVar("ItemPrice", $itemPrice);
+                    // echo("<script>console.log('ID:".$itemID.", Name:".$itemName.", Price:".$itemPrice.", Qty:".$itemQty."');</script>");
+                    echo "<div class='col-sm-4 col-lg-4 col-md-4'>";
+                        echo "<div class = 'thumbnail'>";
+                            echo "<a href = '#'><img src = 'http://placehold.it/320x150' data-toggle = 'modal' data-target ='#item".$itemID."-modal'></a>";
+                            echo "<div class='caption'>";
+                                echo "<h4 class='pull-right'>S$".number_format($itemPrice, 2, '.', ',')."</h4>";
+                                echo "<h4><a href='#' data-toggle='modal' data-target='#item".$itemID."-modal'>{$itemName}</a></h4>";
+                                echo "<p>Testing</p>";
+                            echo "</div>";
+                        echo "</div>";
+                    echo "</div>";
 
-                        // debugPrintVar("ItemPrice", $itemPrice);
-                        // echo("<script>console.log('ID:".$itemID.", Name:".$itemName.", Price:".$itemPrice.", Qty:".$itemQty."');</script>");
-                        echo "<div class='col-sm-4 col-lg-4 col-md-4'>";
-                            echo "<div class = 'thumbnail'>";
-                                echo "<a href = '#'><img src = 'http://placehold.it/320x150' data-toggle = 'modal' data-target ='#item".$itemID."-modal'></a>";
-                                echo "<div class='caption'>";
-                                    echo "<h4 class='pull-right'>S$".number_format($itemPrice, 2, '.', ',')."</h4>";
-                                    echo "<h4><a href='#' data-toggle='modal' data-target='#item".$itemID."-modal'>{$itemName}</a></h4>";
-                                    echo "<p>Testing</p>";
+                    echo "<div class = 'modal fade' id = 'item".$itemID."-modal' tabindex = '-1' role = 'dialog' aria-labelledby = 'myModalLabel' aria-hidden = 'true'>";
+                        echo "<div class='modal-dialog'>";
+                            echo "<div class='modal-content'>";
+
+                                echo "<div class = 'modal-header'>";
+                                    echo "<button type = 'button' class = 'close' data-dismiss = 'modal' aria-hidden = 'true'>&times;</button>";
+                                    echo "<h4 class = 'modal-title' id = 'myModalLabel'>".$itemName."</h4>";
+                                echo "</div>";
+
+                                echo "<div class = 'modal-body'>";
+                                    echo "bla bla";
+                                echo "</div>";
+
+                                echo "<div class = 'modal-footer'>";
+                                    echo "<a href = 'add_to_cart.php?id={$itemID}' type = 'button' class = 'btn btn-primary'>Add To Cart</a>";
                                 echo "</div>";
                             echo "</div>";
                         echo "</div>";
-
-                        echo "<div class = 'modal fade' id = 'item".$itemID."-modal' tabindex = '-1' role = 'dialog' aria-labelledby = 'myModalLabel' aria-hidden = 'true'>";
-                            echo "<div class='modal-dialog'>";
-                                echo "<div class='modal-content'>";
-
-                                    echo "<div class = 'modal-header'>";
-                                        echo "<button type = 'button' class = 'close' data-dismiss = 'modal' aria-hidden = 'true'>&times;</button>";
-                                        echo "<h4 class = 'modal-title' id = 'myModalLabel'>".$itemName."</h4>";
-                                    echo "</div>";
-
-                                    echo "<div class = 'modal-body'>";
-                                        echo "bla bla";
-                                    echo "</div>";
-
-                                    echo "<div class = 'modal-footer'>";
-                                        echo "<a href = 'add_to_cart.php?id={$itemID}' type = 'button' class = 'btn btn-primary'>Add To Cart</a>";
-                                    echo "</div>";
-                                echo "</div>";
-                            echo "</div>";
-                        echo "</div>";
-
-                    }
+                    echo "</div>";
                 }
+                
                 ?>
                 </div>
 
