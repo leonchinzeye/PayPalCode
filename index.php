@@ -10,25 +10,26 @@ include "frontPage.php";
 $qr = "SELECT id, name, price, qty, descrip FROM ItemList";
 $itemDB = $conn->query($qr);
 
-$numRows = $itemDB->num_rows;
-$listItemID = array();
-$listItemName = array();
-$listItemPrice = array();
-$listItemQty = array();
-$listItemDescrip = array();
+//initialist cart
 
-$testnum = 1.0;
-// echo("<script>console.log('testnum:'".$testnum.");</script>");
-// echo("<script>console.log('numRows:'".$numRows.");</script>");
+if(!isset($_SESSION["cart"])) {
+    $_SESSION["cart"] = array();
+}
+
+$numRows = $itemDB->num_rows;
+$itemArray = array();
+
 if($itemDB->num_rows > 0) {
     $counter = 1;
     while($row = $itemDB->fetch_assoc()) {
+        $temp = array();
+        $temp["id"] = $row["id"];
+        $temp["name"] = $row["name"];
+        $temp["price"] = $row["price"];
+        $temp["qty"] = $row["qty"];
+        $temp["descrip"] = $row["descrip"];
 
-        array_push($listItemID, $row["id"]);
-        array_push($listItemName, $row["name"]);
-        array_push($listItemPrice, $row["price"]);
-        array_push($listItemQty, $row["qty"]);
-        array_push($listItemQty, $row["descrip"]);
+        array_push($itemArray, $temp);
 
         $counter += 1;
     }
@@ -38,13 +39,7 @@ for($i = 0; $i < $numRows; $i++) {
     // echo("<script>console.log('ID:".$listItemID[$i].", Name:".$listItemName[$i].", Price:".$listItemPrice[$i].", Qty:".$listItemQty[$i]."');</script>");
 }
 
-echo("<script>console.log('Rows: ".$numRows."');</script>");
+$_SESSION["itemArray"] = $itemArray;
 $_SESSION['numItems'] = $numRows;
-$_SESSION['listItemID'] = $listItemID;
-$_SESSION['listItemName'] = $listItemName;
-$_SESSION['listItemPrice'] = $listItemPrice;
-$_SESSION['listItemQty'] = $listItemQty;
-$_SESSION['listItemDescrip'] = $listItemDescrip;
-
 ?>
 

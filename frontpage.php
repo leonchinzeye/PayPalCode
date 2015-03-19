@@ -4,13 +4,14 @@
 $numItems = $_SESSION["numItems"];
 
 if($numItems > 0) {
-    $listItemID = $_SESSION["listItemID"];
-    $listItemName = $_SESSION["listItemName"];
-    $listItemPrice = $_SESSION["listItemPrice"];
-    $listItemQty = $_SESSION["listItemQty"];
-    $listItemDescrip = $_SESSION["listItemDescrip"];
+    $itemArray = $_SESSION["itemArray"];
+}
+
+if(empty($_SESSION["cart"])) {
+    $cart_counter = 0;
 }
 ?>
+
 <html lang="en">
 
 <head>
@@ -46,7 +47,7 @@ if($numItems > 0) {
            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <a href="cart.php" type="button" class="btn second-button btn-default navbar-btn">
-                    <span class="glyphicon glyphicon-shopping-cart"></span> Cart <span class="badge">0</span></a>        
+                    <span class="glyphicon glyphicon-shopping-cart"></span> Cart <span class="badge"><?php echo $cart_counter?></span></a>        
                </ul>
             </div><!-- /.navbar-collapse -->
         </div>
@@ -97,13 +98,12 @@ if($numItems > 0) {
                 $numItems = $_SESSION["numItems"];
 
                 for($i = 0; $i < $numItems; $i++) {
-                    $itemID = $listItemID[$i];
-                    $itemName = $listItemName[$i];
-                    $itemPrice = $listItemPrice[$i];
-                    $itemQty = $listItemPrice[$i];
+                    $itemID = $itemArray[$i]["id"];
+                    $itemName = $itemArray[$i]["name"];
+                    $itemPrice = $itemArray[$i]["price"];
+                    $itemQty = $itemArray[$i]["qty"];
+                    $itemDescrip = $itemArray[$i]["descrip"];
 
-                    // debugPrintVar("ItemPrice", $itemPrice);
-                    // echo("<script>console.log('ID:".$itemID.", Name:".$itemName.", Price:".$itemPrice.", Qty:".$itemQty."');</script>");
                     echo "<div class='col-sm-4 col-lg-4 col-md-4'>";
                         echo "<div class = 'thumbnail'>";
                             echo "<a href = '#'><img src = 'http://placehold.it/320x150' data-toggle = 'modal' data-target ='#item".$itemID."-modal'></a>";
@@ -138,11 +138,8 @@ if($numItems > 0) {
                 
                 ?>
                 </div>
-
             </div>
-
         </div>
-
     </div>
     <!-- /.container -->
 
