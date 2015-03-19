@@ -3,6 +3,7 @@ session_start();
 
 $page_title = "Index";
 
+// include "connect_db";
 include "frontPage.php";
 
 $host = "localhost";
