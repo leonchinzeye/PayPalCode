@@ -7,7 +7,7 @@ $page_title = "Index";
 
 include "extraphpfunctions.php";
 include "connect_db.php";
-include "frontPage.php";
+
 
 $qr = "SELECT id, name, price, qty, descrip FROM ItemList";
 $itemDB = $conn->query($qr);
@@ -41,11 +41,9 @@ if($itemDB->num_rows > 0) {
     }
 }
 
-for($i = 0; $i < $numRows; $i++) {
-    // echo("<script>console.log('ID:".$listItemID[$i].", Name:".$listItemName[$i].", Price:".$listItemPrice[$i].", Qty:".$listItemQty[$i]."');</script>");
-}
-
 $_SESSION["itemArray"] = $itemArray;
 $_SESSION['numItems'] = $numRows;
+
+include "frontPage.php";
 ?>
 

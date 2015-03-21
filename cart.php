@@ -137,13 +137,18 @@ $sum = 0;
                                     echo "</a></td>";
                                     echo "<td>";
                                         
-                                    echo "<form action='Checkout/paypal_ec_redirect.php' method='POST'>";
-                                          echo "<input type='hidden' name='PAYMENTREQUEST_0_AMT' value='".$sum."'></input>";
-                                          echo "<input type='hidden' name='currencyCodeType' value='SGD'></input>";
-                                          echo "<input type='hidden' name='paymentType' value='Sale'></input>";
+                                    echo "<form action='process_cart.php'>";
                                           //<!--Pass additional input parameters based on your shopping cart. For complete list of all the parameters click here -->
                                           echo "<input type='image' src='https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-medium.png' alt='Check out with PayPal'></input>";
                                     echo "</form>";
+                                        
+                                    // echo "<form action='Checkout/paypal_ec_redirect.php' method='POST'>";
+                                    //       echo "<input type='hidden' name='PAYMENTREQUEST_0_AMT' value='".$sum."'></input>";
+                                    //       echo "<input type='hidden' name='currencyCodeType' value='SGD'></input>";
+                                    //       echo "<input type='hidden' name='paymentType' value='Sale'></input>";
+                                    //       //<!--Pass additional input parameters based on your shopping cart. For complete list of all the parameters click here -->
+                                    //       echo "<input type='image' src='https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-medium.png' alt='Check out with PayPal'></input>";
+                                    // echo "</form>";
                                     echo "</td>";
                                     echo "<td>";
                                     echo "<button type='button' class='btn btn-success'>";
