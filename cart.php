@@ -26,13 +26,6 @@ $sum = 0;
     <!-- Custom CSS -->
     <link href="css/shop-homepage.css" rel="stylesheet">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
 </head>
 
 <body>
@@ -145,7 +138,7 @@ $sum = 0;
                                     echo "<td>";
                                         
                                     echo "<form action='Checkout/paypal_ec_redirect.php' method='POST'>";
-                                          echo "<input type='hidden' name='PAYMENTREQUEST_0_AMT' value='10.0'></input>";
+                                          echo "<input type='hidden' name='PAYMENTREQUEST_0_AMT' value='".$sum."'></input>";
                                           echo "<input type='hidden' name='currencyCodeType' value='SGD'></input>";
                                           echo "<input type='hidden' name='paymentType' value='Sale'></input>";
                                           //<!--Pass additional input parameters based on your shopping cart. For complete list of all the parameters click here -->
