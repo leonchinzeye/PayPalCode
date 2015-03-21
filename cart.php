@@ -2,6 +2,8 @@
 <?php
 session_start();
 
+include "extraphpfunctions.php";
+
 $cart_counter = $_SESSION["cartcounter"];
 $cart = $_SESSION["cart"];
 $itemArray = $_SESSION["itemArray"];
@@ -73,9 +75,17 @@ $sum = 0;
                             echo "</thead>";
                             echo "<tbody>";
 
+                                debugPrintVar("Cart Objects", count($_SESSION["cart"]));
+                                var_dump($_SESSION["cart"]);
                                 for($i = 0; $i < count($_SESSION["cart"]); $i++) {
+                                    debugPrintVar("i", $i);
+
                                     $itemID = $cart[$i]["id"];
+                                    debugPrintVar("Cart ID", $itemID);
+
                                     $rowID = $itemID - 1;
+                                    debugPrintVar("Row ID", $itemID);
+
                                     $itemName = $itemArray[$rowID]["name"];
                                     $itemPrice = $itemArray[$rowID]["price"];
                                     $itemTotal = $itemPrice * $cart[$i]["qty"];
@@ -96,9 +106,9 @@ $sum = 0;
                                         echo "<td class='col-sm-1 col-md-1 text-center'><strong>S$".number_format($itemPrice, 2, ".", ",")."</strong></td>";
                                         echo "<td class='col-sm-1 col-md-1 text-center'><strong>S$".number_format($itemTotal, 2, ".", ",")."</strong></td>";
                                         echo "<td class='col-sm-1 col-md-1'>";
-                                        echo "<button type='button' class='btn btn-danger'>";
-                                            echo "<span class='glyphicon glyphicon-remove'></span> Remove";
-                                        echo "</button></td>";
+                                        echo "<a href = 'remove_from_cart.php?id={$itemID}' type = 'button' class = 'btn btn-danger'>";
+                                            echo "<span class = 'glyphicon glyphicon-remove'></span> Remove";
+                                        echo "</a></td>";
                                     echo "</tr>";
                                 }
                             
