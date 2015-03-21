@@ -1,6 +1,6 @@
 <?php
 $host = "localhost";
-$dbname = "ShopDB";
+$dbname = "shop_test";
 $username = "root";
 $password = "";
 // echo("<script>console.log('I here: ');</script>");
