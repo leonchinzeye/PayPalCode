@@ -44,6 +44,6 @@ if($itemDB->num_rows > 0) {
 $_SESSION["itemArray"] = $itemArray;
 $_SESSION['numItems'] = $numRows;
 
-include "frontPage.php";
+include "frontpage.php";
 ?>
 
