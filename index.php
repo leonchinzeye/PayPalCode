@@ -9,10 +9,10 @@ include "extraphpfunctions.php";
 include "connect_db.php";
 
 
-$qr = "SELECT id, name, price, qty, descrip FROM ItemList";
+$qr = "SELECT id, name, price, descrip, shortdescrip FROM ItemList";
 $itemDB = $conn->query($qr);
 
-//initialist cart
+//initialise cart
 
 if(!isset($_SESSION["cartcounter"])) {
     $_SESSION["cartcounter"] = 0;
@@ -32,8 +32,8 @@ if($itemDB->num_rows > 0) {
         $temp["id"] = $row["id"];
         $temp["name"] = $row["name"];
         $temp["price"] = $row["price"];
-        $temp["qty"] = $row["qty"];
         $temp["descrip"] = $row["descrip"];
+        $temp["shortdescrip"] = $row["shortdescrip"];
 
         array_push($itemArray, $temp);
 
@@ -44,6 +44,6 @@ if($itemDB->num_rows > 0) {
 $_SESSION["itemArray"] = $itemArray;
 $_SESSION['numItems'] = $numRows;
 
-include "frontPage.php";
+include "frontpage.php";
 ?>
 

@@ -1,9 +1,8 @@
 <?php
-$host = "localhost";
-$dbname = "shop_test";
-$username = "root";
-$password = "";
-// echo("<script>console.log('I here: ');</script>");
+$host = "leonchinzeye.ipagemysql.com";
+$dbname = "item_list";
+$username = "leonchin";
+$password = "password1";
 
 $conn = new mysqli($host, $username, $password, $dbname);
 if ($conn->connect_error) {

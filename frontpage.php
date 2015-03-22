@@ -69,13 +69,13 @@ $cart_counter = $_SESSION["cartcounter"];
                             </ol>
                             <div class="carousel-inner">
                                 <div class="item active">
-                                    <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                                    <img class="slide-image" src="img/1-1.png" alt="">
                                 </div>
                                 <div class="item">
-                                    <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                                    <img class="slide-image" src="img/2-1.png" alt="">
                                 </div>
                                 <div class="item">
-                                    <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                                    <img class="slide-image" src="img/3-1.png" alt="">
                                 </div>
                             </div>
                             <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
@@ -99,16 +99,16 @@ $cart_counter = $_SESSION["cartcounter"];
                     $itemID = $itemArray[$i]["id"];
                     $itemName = $itemArray[$i]["name"];
                     $itemPrice = $itemArray[$i]["price"];
-                    $itemQty = $itemArray[$i]["qty"];
                     $itemDescrip = $itemArray[$i]["descrip"];
-
+                    $itemShortDescrip = $itemArray[$i]["shortdescrip"];
                     echo "<div class='col-sm-4 col-lg-4 col-md-4'>";
                         echo "<div class = 'thumbnail'>";
-                            echo "<a href = '#'><img src = 'http://placehold.it/320x150' data-toggle = 'modal' data-target ='#item".$itemID."-modal'></a>";
+                            echo "<a href = '#'><img src = 'img/".$itemID."-2.png' data-toggle = 'modal' data-target ='#item".$itemID."-modal'></a>";
                             echo "<div class='caption'>";
                                 echo "<h4 class='pull-right'>S$".number_format($itemPrice, 2, '.', ',')."</h4>";
                                 echo "<h4><a href='#' data-toggle='modal' data-target='#item".$itemID."-modal'>{$itemName}</a></h4>";
-                                echo "<p>Testing</p>";
+                                echo "<p>".$itemShortDescrip."</p>";
+                                echo "<a href = 'add_to_cart.php?id={$itemID}' type = 'button' class = 'btn btn-primary'>Add To Cart</a>";
                             echo "</div>";
                         echo "</div>";
                     echo "</div>";
@@ -123,7 +123,8 @@ $cart_counter = $_SESSION["cartcounter"];
                                 echo "</div>";
 
                                 echo "<div class = 'modal-body'>";
-                                    echo "bla bla";
+                                    echo "<div style='text-align:center'><img src = 'img/".$itemID."-3.png'></div><br>";
+                                    echo $itemDescrip;
                                 echo "</div>";
 
                                 echo "<div class = 'modal-footer'>";
