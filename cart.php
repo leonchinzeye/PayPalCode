@@ -67,7 +67,7 @@ $sum = 0;
                             echo "<thead>";
                                 echo "<tr>";
                                     echo "<th>Product</th>";
-                                    echo "<th>Quantity</th>";
+                                    echo "<th class='text-center'>Quantity</th>";
                                     echo "<th class='text-center'>Price</th>";
                                     echo "<th class='text-center'>Total</th>";
                                     echo "<th> </th>";
@@ -75,16 +75,10 @@ $sum = 0;
                             echo "</thead>";
                             echo "<tbody>";
 
-                                debugPrintVar("Cart Objects", count($_SESSION["cart"]));
-                                var_dump($_SESSION["cart"]);
                                 for($i = 0; $i < count($_SESSION["cart"]); $i++) {
-                                    debugPrintVar("i", $i);
 
                                     $itemID = $cart[$i]["id"];
-                                    debugPrintVar("Cart ID", $itemID);
-
                                     $rowID = $itemID - 1;
-                                    debugPrintVar("Row ID", $itemID);
 
                                     $itemName = $itemArray[$rowID]["name"];
                                     $itemPrice = $itemArray[$rowID]["price"];
@@ -93,7 +87,7 @@ $sum = 0;
                                     echo "<tr>";
                                         echo "<td class = 'col-sm-8 col-md-6'>";
                                         echo "<div class = 'media'>";
-                                            echo "<a class = 'thumbnail pull-left' href = '#'> <img class = 'media-object' src = 'http://icons.iconarchive.com/icons/custom-icon-design/flatastic-2/72/product-icon.png' style = 'width: 72px; height: 72px'></a>";
+                                            echo "<a class = 'thumbnail pull-left' href = '#'><img src = 'img/".$itemID."-4.png' style = 'width: 72px; height: 72px'></a>";
                                             echo "<div class = 'media-body'>";
                                                 echo "<h4 class='media-heading'><a href='#'>".$itemName."</a></h4>";
                                                 // echo "<h5 class='media-heading'> by <a href='#'>Brand name</a></h5>";
@@ -101,7 +95,11 @@ $sum = 0;
                                             echo "</div>";
                                         echo "</div></td>";
                                         echo "<td class='col-sm-1 col-md-1' style='text-align: center'>";
-                                        echo "<input type='email' class='form-control' id='exampleInputEmail1' value='".$cart[$i]["qty"]."'>";
+                                        echo "<a href = 'plusqty.php?id={$itemID}' type = 'button' class = 'btn-group btn-group-sm'>";
+                                        echo "<span class = 'glyphicon glyphicon-plus'></span></a>";
+                                        echo "<strong> ".$cart[$i]["qty"]." </strong>";
+                                        echo "<a href = 'minusqty.php?id={$itemID}' type = 'button' class = 'btn-group btn-group-sm'>";
+                                        echo "<span class = 'glyphicon glyphicon-minus'></span></a>";
                                         echo "</td>";
                                         echo "<td class='col-sm-1 col-md-1 text-center'><strong>S$".number_format($itemPrice, 2, ".", ",")."</strong></td>";
                                         echo "<td class='col-sm-1 col-md-1 text-center'><strong>S$".number_format($itemTotal, 2, ".", ",")."</strong></td>";
@@ -120,13 +118,6 @@ $sum = 0;
                                     echo "<td class='text-right'><h5><strong>S$".number_format($sum, 2, ".", ",")."</strong></h5></td>";
                                 echo "</tr>";
                                 
-                                echo "<tr>";
-                                    echo "<td>   </td>";
-                                    echo "<td>   </td>";
-                                    echo "<td>   </td>";
-                                    echo "<td><h5>Estimated shipping</h5></td>";
-                                    echo "<td class='text-right'><h5><strong>$6.94</strong></h5></td>";
-                                echo "</tr>";
                                 echo "<tr>";
                                     echo "<td>   </td>";
                                     echo "<td>   </td>";
