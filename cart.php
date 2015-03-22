@@ -87,9 +87,9 @@ $sum = 0;
                                     echo "<tr>";
                                         echo "<td class = 'col-sm-8 col-md-6'>";
                                         echo "<div class = 'media'>";
-                                            echo "<a class = 'thumbnail pull-left' href = '#'><img src = 'img/".$itemID."-4.png' style = 'width: 72px; height: 72px'></a>";
+                                            echo "<img class = 'thumbnail pull-left' src = 'img/".$itemID."-4.png' style = 'width: 72px; height: 72px'>";
                                             echo "<div class = 'media-body'>";
-                                                echo "<h4 class='media-heading'><a href='#'>".$itemName."</a></h4>";
+                                                echo "<h4 class='media-heading'>".$itemName."</h4>";
                                                 // echo "<h5 class='media-heading'> by <a href='#'>Brand name</a></h5>";
                                                 echo "<span>Status: </span><span class='text-success'><strong>In Stock</strong></span>";
                                             echo "</div>";
@@ -109,14 +109,6 @@ $sum = 0;
                                         echo "</a></td>";
                                     echo "</tr>";
                                 }
-                            
-                                echo "<tr>";
-                                    echo "<td>   </td>";
-                                    echo "<td>   </td>";
-                                    echo "<td>   </td>";
-                                    echo "<td><h5>Subtotal</h5></td>";
-                                    echo "<td class='text-right'><h5><strong>S$".number_format($sum, 2, ".", ",")."</strong></h5></td>";
-                                echo "</tr>";
                                 
                                 echo "<tr>";
                                     echo "<td>   </td>";
@@ -126,6 +118,7 @@ $sum = 0;
                                     echo "<td class='text-right'><h3><strong>S$".number_format($sum, 2, ".", ",")."</strong></h3></td>";
                                 echo "</tr>";
                                 echo "<tr>";
+                                    echo "<td>   </td>";
                                     echo "<td>   </td>";
                                     echo "<td>";
                                     echo "<a href='emptycart.php' type = 'button' class = 'btn btn-default'>";
@@ -138,11 +131,6 @@ $sum = 0;
                                     echo "</a></td>";
                                     echo "<td>";
                                         
-                                    // echo "<form action='process_cart.php'>";
-                                    //       //<!--Pass additional input parameters based on your shopping cart. For complete list of all the parameters click here -->
-                                    //       echo "<input type='image' src='https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-medium.png' alt='Check out with PayPal'></input>";
-                                    // echo "</form>";
-                                        
                                     echo "<form action='Checkout/paypal_ec_redirect.php' method='POST'>";
                                           echo "<input type='hidden' name='PAYMENTREQUEST_0_AMT' value='".$sum."'></input>";
                                           echo "<input type='hidden' name='currencyCodeType' value='SGD'></input>";
@@ -151,10 +139,7 @@ $sum = 0;
                                           echo "<input type='image' src='https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-medium.png' alt='Check out with PayPal'></input>";
                                     echo "</form>";
                                     echo "</td>";
-                                    echo "<td>";
-                                    echo "<button type='button' class='btn btn-success'>";
-                                        echo "Checkout <span class='glyphicon glyphicon-play'></span>";
-                                    echo "</button></td>";
+                                    
                                 echo "</tr>";
                             echo "</tbody>";
                         echo "</table>";

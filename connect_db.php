@@ -1,7 +1,7 @@
 <?php
-$host = "leonchinzeye.ipagemysql.com";
-$dbname = "item_list";
-$username = "leonchin";
+$host = "mysql12.000webhost.com";
+$dbname = "a8479141_shop";
+$username = "a8479141_leon";
 $password = "password1";
 
 $conn = new mysqli($host, $username, $password, $dbname);
